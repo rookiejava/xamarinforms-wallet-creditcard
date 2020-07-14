@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFWallet.Android", "XFWalle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFWallet.iOS", "XFWallet\XFWallet.iOS\XFWallet.iOS.csproj", "{DF932479-6DB3-4701-AFE2-EBAB840348B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XFWallet", "XFWallet\XFWallet\XFWallet.csproj", "{14614A38-CF6E-4E04-A7FC-0908E3F36321}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XFWallet", "XFWallet\XFWallet\XFWallet.csproj", "{14614A38-CF6E-4E04-A7FC-0908E3F36321}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XFWallet.Tizen", "XFWallet\XFWallet.Tizen\XFWallet.Tizen.csproj", "{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,18 @@ Global
 		{14614A38-CF6E-4E04-A7FC-0908E3F36321}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{14614A38-CF6E-4E04-A7FC-0908E3F36321}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{14614A38-CF6E-4E04-A7FC-0908E3F36321}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|iPhone.Build.0 = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{B0CF965D-BA58-4A3A-A210-45B8F8E597FA}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
