@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics;
 using Xamarin.Forms;
 using XFWallet.ViewModels;
 
@@ -15,6 +16,7 @@ namespace XFWallet
         {
             InitializeComponent();
             BindingContext = viewModel = new MainPageViewModel();
+            viewModel.ScrollView = scrollView;
         }
 
         protected override void OnAppearing()

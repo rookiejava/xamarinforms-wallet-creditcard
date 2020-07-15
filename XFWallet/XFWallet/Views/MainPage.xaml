@@ -22,11 +22,10 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="ActiveIndicatorColor" TargetType="controls:IndicatorsControl">
-                <Setter Property="BackgroundColor" Value="#4867EA" />
+            <Style x:Key="ActiveIndicatorColor" TargetType="Frame">
+                <Setter Property="OutlineColor" Value="#4867EA" />
             </Style>
             <Style x:Key="InactiveIndicatorColor" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="Transparent" />
                 <Setter Property="OutlineColor" Value="#bdbdbd" />
             </Style>
             <Color x:Key="colorPink">#FF1577</Color>
@@ -41,8 +40,8 @@
         </Grid.RowDefinitions>
         <Grid
             Grid.Row="0"
-            Margin="40,20,0,10"
-            ColumnSpacing="20">
+            Margin="200,100,0,30"
+            ColumnSpacing="100">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
@@ -53,39 +52,39 @@
                 Grid.Column="0"
                 Aspect="AspectFit"
                 BackgroundColor="Transparent"
-                HeightRequest="22"
+                HeightRequest="100"
                 Source="ic_menu.png"
-                WidthRequest="22" />
+                WidthRequest="100" />
             <ImageButton
                 Grid.Column="1"
                 Aspect="AspectFit"
                 BackgroundColor="Transparent"
-                HeightRequest="22"
+                HeightRequest="100"
                 Source="ic_heart.png"
-                WidthRequest="22" />
+                WidthRequest="100" />
             <ImageButton
                 Grid.Column="2"
                 Aspect="AspectFit"
                 BackgroundColor="Transparent"
-                HeightRequest="22"
+                HeightRequest="100"
                 Source="ic_notification.png"
-                WidthRequest="22" />
+                WidthRequest="100" />
             <ImageButton
                 Grid.Column="3"
                 Aspect="AspectFit"
                 BackgroundColor="Transparent"
-                HeightRequest="22"
+                HeightRequest="100"
                 Source="ic_shopping_bag.png"
-                WidthRequest="22" />
+                WidthRequest="100" />
             <BoxView
                 Grid.Column="3"
                 Margin="0,0,-3,0"
                 BackgroundColor="Red"
-                CornerRadius="6"
-                HeightRequest="12"
+                CornerRadius="25"
+                HeightRequest="50"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
-                WidthRequest="12" />
+                WidthRequest="50" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -97,20 +96,20 @@
                 Grid.Column="0"
                 Margin="-5,10,0,0"
                 Aspect="AspectFit"
-                HeightRequest="28"
+                HeightRequest="100"
                 Source="ic_x_left.png"
                 TranslationY="20"
-                WidthRequest="28" />
+                WidthRequest="100" />
             <pancakeView:PancakeView
                 Grid.Column="1"
-                Margin="8,20,10,10"
+                Margin="100,100,50,50"
                 Padding="{OnPlatform Android='0,6,0,0',
-                                     iOS='0,2,0,2'}"
+                                     iOS='0,2,0,2', Tizen='0,10,0,0'}"
                 BackgroundColor="{StaticResource colorWhite}"
                 CornerRadius="{OnPlatform Android='30',
-                                          iOS='22'}"
+                                          iOS='22', Tizen='75'}"
                 HasShadow="False"
-                HeightRequest="40">
+                HeightRequest="150">
                 <Grid Padding="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -119,12 +118,13 @@
                     <renderers:CustomEntryBorderless
                         x:Name="entrySearch"
                         Grid.Column="0"
-                        Margin="30,0,0,0"
+                        Margin="50,0,0,0"
                         FontFamily="Poppins-Regular"
-                        FontSize="Small"
+                        FontSize="30"
                         HorizontalOptions="FillAndExpand"
                         Placeholder="Search"
                         Text="{Binding SearchText}"
+                        ReturnCommand="{Binding SearchCommand}"
                         VerticalOptions="Center">
                         <renderers:CustomEntryBorderless.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
@@ -137,13 +137,13 @@
                     <ImageButton
                         Grid.Column="1"
                         Margin="{OnPlatform Android='0,-4,25,0',
-                                            iOS='0,-2,25,0'}"
+                                            iOS='0,-2,25,0', Tizen='0,-4,50,0'}"
                         Aspect="AspectFit"
                         BackgroundColor="Transparent"
                         Command="{Binding SearchCommand}"
-                        HeightRequest="18"
+                        HeightRequest="60"
                         Source="ic_search.png"
-                        WidthRequest="18">
+                        WidthRequest="60">
                         <ImageButton.Triggers>
                             <DataTrigger
                                 Binding="{Binding IsVisibleBtnClose}"
@@ -156,26 +156,26 @@
                     <ImageButton
                         Grid.Column="1"
                         Margin="{OnPlatform Android='0,-4,25,0',
-                                            iOS='0,-2,25,0'}"
+                                            iOS='0,-2,25,0', Tizen='0,-4,50,0'}"
                         Aspect="AspectFit"
                         BackgroundColor="Transparent"
                         Command="{Binding ClearSearchTextCommand}"
-                        HeightRequest="22"
+                        HeightRequest="60"
                         IsVisible="{Binding IsVisibleBtnClose}"
                         Source="ic_close.png"
-                        WidthRequest="22" />
+                        WidthRequest="60" />
                 </Grid>
             </pancakeView:PancakeView>
             <Image
                 Grid.Column="2"
                 Margin="0,0,-5,0"
                 Aspect="AspectFit"
-                HeightRequest="28"
+                HeightRequest="100"
                 Source="ic_x_right.png"
-                WidthRequest="28" />
+                WidthRequest="100" />
         </Grid>
-        <ScrollView Grid.Row="2">
-            <pancakeView:PancakeView BackgroundColor="{StaticResource colorWhite}" CornerRadius="60,60,0,0">
+        <ScrollView x:Name="scrollView" Grid.Row="2">
+            <pancakeView:PancakeView BackgroundColor="{StaticResource colorWhite}" CornerRadius="120,120,0,0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -185,19 +185,20 @@
                     </Grid.RowDefinitions>
                     <StackLayout
                         Grid.Row="0"
-                        Margin="35,25,45,10"
+                        Margin="100,100,100,20"
                         Orientation="Horizontal">
                         <Label
-                            FontFamily="PoppinsSemiBold"
-                            FontSize="22"
+                            FontFamily="Poppins-SemiBold"
+                            FontSize="40"
                             HorizontalOptions="StartAndExpand"
                             Text="Cards" />
                         <Label
                             CharacterSpacing="2"
-                            FontFamily="PoppinsSemiBold"
-                            FontSize="22"
+                            WidthRequest="200"
+                            FontFamily="Poppins-Regular"
+                            FontSize="40"
                             HorizontalOptions="End"
-                            Text="..."
+                            Text=". . ."
                             VerticalOptions="Center">
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateToAddCreditCardPageCommand}" NumberOfTapsRequired="1" />
@@ -208,7 +209,7 @@
                         Grid.Row="1"
                         IsCyclical="False"
                         ItemsSource="{Binding Cards}"
-                        PositionShiftValue="65">
+                        PositionShiftValue="200">
                         <x:Arguments>
                             <proc:BaseCoverFlowFrontViewProcessor RotationFactor="0.5" ScaleFactor="0.75" />
                             <proc:BaseCoverFlowBackViewProcessor ScaleFactor="0.75" />
@@ -216,13 +217,12 @@
                         <cardView:CoverFlowView.ItemTemplate>
                             <DataTemplate x:DataType="models:Card">
                                 <pancakeView:PancakeView
-                                    Margin="35,0,44,35"
-                                    Padding="0"
+                                    Margin="150,0,150,35"
                                     BackgroundColor="{StaticResource colorWhite}"
-                                    CornerRadius="15"
-                                    Elevation="10"
+                                    CornerRadius="400"
+                                    Elevation="100"
                                     HasShadow="False"
-                                    HeightRequest="180">
+                                    HeightRequest="1000">
                                     <Grid RowSpacing="0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto" />
@@ -243,9 +243,9 @@
                                         <Label
                                             Grid.Row="0"
                                             Grid.ColumnSpan="2"
-                                            Margin="15,10,0,0"
-                                            FontFamily="PoppinsSemiBold"
-                                            FontSize="10"
+                                            Margin="75,125,0,0"
+                                            FontFamily="Poppins-SemiBold"
+                                            FontSize="25"
                                             Text="Business"
                                             TextColor="{StaticResource colorWhite}"
                                             VerticalOptions="Start" />
@@ -253,20 +253,20 @@
                                             Grid.Row="1"
                                             Grid.ColumnSpan="2"
                                             Margin="{OnPlatform Android='15,0,0,34',
-                                                                iOS='15,0,0,38'}"
+                                                                iOS='15,0,0,38', Tizen='100,0,0,250'}"
                                             Padding="5"
-                                            FontFamily="PoppinsSemiBold"
+                                            FontFamily="Poppins-SemiBold"
                                             FontSize="{OnPlatform Android='15',
-                                                                  iOS='18'}"
+                                                                  iOS='18', Tizen='35'}"
                                             Text="{Binding cardFakeNumber}"
                                             TextColor="{StaticResource colorWhite}"
                                             VerticalOptions="End" />
                                         <Label
                                             Grid.Row="2"
                                             Grid.ColumnSpan="2"
-                                            Margin="15,0,0,5"
-                                            FontFamily="PoppinsSemiBold"
-                                            FontSize="Small"
+                                            Margin="75,0,0,100"
+                                            FontFamily="Poppins-SemiBold"
+                                            FontSize="35"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding cardName}"
                                             TextColor="{StaticResource colorWhite}"
@@ -274,67 +274,72 @@
                                         <Image
                                             Grid.Row="2"
                                             Grid.Column="1"
-                                            Margin="0,0,15,10"
+                                            Margin="0,0,75,120"
                                             Aspect="AspectFit"
-                                            HeightRequest="36"
+                                            HeightRequest="150"
                                             Source="{Binding cardFlag}"
-                                            WidthRequest="48" />
+                                            WidthRequest="180" />
                                     </Grid>
                                 </pancakeView:PancakeView>
                             </DataTemplate>
                         </cardView:CoverFlowView.ItemTemplate>
                         <controls:IndicatorsControl
-                            Margin="0,20,0,0"
+                            Scale="3"
+                            Padding="250,0,0,0"
+                            Margin="0,20,100,0"
                             IsVisible="True"
+                            WidthRequest="300"
+                            HeightRequest="50"
                             SelectedIndicatorStyle="{StaticResource ActiveIndicatorColor}"
                             UnselectedIndicatorStyle="{StaticResource InactiveIndicatorColor}" />
                     </cardView:CoverFlowView>
                     <StackLayout
                         Grid.Row="2"
-                        Margin="38,20,20,0"
+                        Margin="100,100,100,20"
                         Orientation="Horizontal"
                         Spacing="0">
                         <Label
-                            FontFamily="PoppinsSemiBold"
-                            FontSize="20"
+                            FontFamily="Poppins-SemiBold"
+                            FontSize="40"
                             HorizontalOptions="StartAndExpand"
                             Text="Latest Offers"
                             VerticalOptions="Center" />
                         <Label
                             Margin="0,2,5,0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="Micro"
+                            FontFamily="Poppins-Regular"
+                            FontSize="20"
                             HorizontalOptions="End"
                             Text="Sort by"
                             VerticalOptions="Center" />
                         <Label
                             Margin="0,2,5,0"
-                            FontFamily="PoppinsRegular"
-                            FontSize="Micro"
+                            FontFamily="Poppins-Regular"
+                            FontSize="20"
                             HorizontalOptions="End"
                             Text="Recent"
                             TextColor="#2D51E9"
                             VerticalOptions="Center" />
                         <Image
-                            Margin="0,2,0,0"
+                            Margin="0,2,150,0"
                             Aspect="AspectFit"
-                            HeightRequest="10"
+                            HeightRequest="50"
                             Source="ic_down_arrow.png"
                             VerticalOptions="Center"
-                            WidthRequest="10" />
+                            WidthRequest="50" />
                     </StackLayout>
-                    <CollectionView
+                    <ListView
                         x:Name="listStore"
                         Grid.Row="3"
-                        Margin="35,0,0,0"
+                        Margin="200,0,200,0"
                         ItemsSource="{Binding StoresSearch}"
                         SelectionMode="None"
                         VerticalScrollBarVisibility="Never">
-                        <CollectionView.ItemsLayout>
+                        <!--<ListView.ItemsLayout>
                             <LinearItemsLayout Orientation="Vertical" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
+                        </ListView.ItemsLayout>-->
+                        <ListView.ItemTemplate>
                             <DataTemplate x:DataType="models:Store">
+                                <ViewCell>
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -349,30 +354,30 @@
                                         Grid.Row="0"
                                         Grid.Column="0"
                                         Margin="5,20,0,20"
-                                        Padding="15"
+                                        Padding="45"
                                         BackgroundColor="#F5F6FA"
-                                        CornerRadius="20"
+                                        CornerRadius="50"
                                         Elevation="6"
                                         HasShadow="False">
                                         <Image
                                             Aspect="AspectFit"
-                                            HeightRequest="36"
+                                            HeightRequest="144"
                                             Source="{Binding image}"
-                                            WidthRequest="36" />
+                                            WidthRequest="144" />
                                     </pancakeView:PancakeView>
                                     <StackLayout
                                         Grid.Row="0"
                                         Grid.Column="1"
-                                        Margin="20,0,0,0"
+                                        Margin="100,0,0,0"
                                         Spacing="0"
                                         VerticalOptions="Center">
                                         <Label
-                                            FontFamily="PoppinsMedium"
-                                            FontSize="17"
+                                            FontFamily="Poppins-Medium"
+                                            FontSize="30"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding name}" />
                                         <Label
-                                            FontSize="Small"
+                                            FontSize="24"
                                             Text="Just Now"
                                             TextColor="#C0C4D5" />
                                     </StackLayout>
@@ -380,8 +385,8 @@
                                         Grid.Row="0"
                                         Grid.Column="2"
                                         Margin="0,-15,22,0"
-                                        FontFamily="PoppinsMedium"
-                                        FontSize="12"
+                                        FontFamily="Poppins-Medium"
+                                        FontSize="20"
                                         Text="Shop Now"
                                         TextColor="{StaticResource colorPink}"
                                         VerticalOptions="Center">
@@ -401,19 +406,30 @@
                                         HeightRequest="1"
                                         HorizontalOptions="FillAndExpand" />
                                 </Grid>
+                                </ViewCell>
                             </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                        <CollectionView.EmptyView>
+                        </ListView.ItemTemplate>
+                        <!--<CollectionView.EmptyView>
                             <Label
-                                Padding="20,20,55,0"
-                                FontSize="Micro"
+                                Padding="20,300,55,0"
+                                FontSize="30"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
                                 Text="No results found =("
                                 TextColor="Gray"
                                 VerticalOptions="FillAndExpand" />
-                        </CollectionView.EmptyView>
-                    </CollectionView>
+                        </CollectionView.EmptyView>-->
+                    </ListView>
+                    <ContentView x:Name="emptyView" Grid.Row="3" IsVisible="{Binding IsEmpty}" >
+                        <Label
+                                Padding="20,300,55,0"
+                                FontSize="30"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Text="No results found =("
+                                TextColor="Gray"
+                                VerticalOptions="FillAndExpand" />
+                    </ContentView>
                 </Grid>
             </pancakeView:PancakeView>
         </ScrollView>

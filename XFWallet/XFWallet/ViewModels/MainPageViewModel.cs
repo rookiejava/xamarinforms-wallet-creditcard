@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using XFWallet.Helpers;
 using XFWallet.Models;
 using XFWallet.ViewModel;
@@ -26,6 +28,7 @@ namespace XFWallet.ViewModels
             NavigateToAddCreditCardPageCommand = new Command(async () => await ExecuteNavigateToAddCreditCardPageCommand());
             GetCards();
             GetStores();
+            IsEmpty = StoresSearch.Count == 0;
         }
 
         public Command OpenLinkCommand { get; }
@@ -35,6 +38,18 @@ namespace XFWallet.ViewModels
         public ObservableCollection<Card> Cards { get; set; }
         public ObservableCollection<Store> Stores { get; set; }
         public ObservableCollection<Store> StoresSearch { get; set; }
+
+        public ScrollView ScrollView { get; set; }
+
+        private bool _isEmpty;
+        public bool IsEmpty
+        {
+            get { return _isEmpty; }
+            set
+            {
+                SetProperty(ref _isEmpty, value);
+            }
+        }
 
         private string _searchText;
         public string SearchText
@@ -94,17 +109,102 @@ namespace XFWallet.ViewModels
 
             Stores.Add(new Store()
             {
-                name = "Careem",
-                link = "https://www.careem.com/",
-                image = "careem.png"
+                name = "Burger King",
+                link = "https://www.bk.com",
+                image = "bergerking.png"
             });
 
             Stores.Add(new Store()
             {
-                name = "Centrepoint",
-                link = "https://www.centrepointstores.com/",
-                image = "centrepoint.png"
+                name = "Jack In The Box",
+                link = "https://www.jackinthebox.com/food",
+                image = "jackinthebox.png"
             });
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "Subway",
+            //    link = "https://www.subway.com/en-US/MenuNutrition/Menu",
+            //    image = "subway.png"
+            //});
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "Wendy's",
+            //    link = "https://order.wendys.com/categories?site=menu",
+            //    image = "wendys.png"
+            //});
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "Dunkin' Donuts",
+            //    link = "https://www.dunkindonuts.com/en",
+            //    image = "dunkindonuts.png"
+            //});
+
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "IN-N-OUT BURGER",
+            //    link = "https://www.in-n-out.com",
+            //    image = "inanout.png"
+            //});
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "FIVE GUYS",
+            //    link = "https://www.fiveguys.com",
+            //    image = "fiveguys.png"
+            //});
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "SHAKE SHACK",
+            //    link = "https://www.shakeshack.com",
+            //    image = "shakeshack.png"
+            //});
+
+            Stores.Add(new Store()
+            {
+                name = "Starbucks",
+                link = "https://www.starbucks.com/",
+                image = "starbucks.png"
+            });
+
+            Stores.Add(new Store()
+            {
+                name = "Blue Bottle Coffee",
+                link = "https://bluebottlecoffee.com",
+                image = "bluebottle.png"
+            });
+
+            Stores.Add(new Store()
+            {
+                name = "Cheesecake Factory",
+                link = "https://www.thecheesecakefactory.com",
+                image = "cheesecakefactory.png"
+            });
+
+            Stores.Add(new Store()
+            {
+                name = "Chipotle",
+                link = "https://www.chipotle.com",
+                image = "chipotle.png"
+            });
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "Careem",
+            //    link = "https://www.careem.com/",
+            //    image = "careem.png"
+            //});
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "Centrepoint",
+            //    link = "https://www.centrepointstores.com/",
+            //    image = "centrepoint.png"
+            //});
 
             Stores.Add(new Store()
             {
@@ -113,11 +213,32 @@ namespace XFWallet.ViewModels
                 image = "amazon.png"
             });
 
+            //Stores.Add(new Store()
+            //{
+            //    name = "ebay",
+            //    link = "https://www.ebay.com/",
+            //    image = "ebay.png"
+            //});
+
             Stores.Add(new Store()
             {
-                name = "Starbucks",
-                link = "https://www.starbucks.com/",
-                image = "starbucks.png"
+                name = "Macy's",
+                link = "https://www.macys.com/",
+                image = "macys.png"
+            });
+
+            //Stores.Add(new Store()
+            //{
+            //    name = "BARNES & NOBLE",
+            //    link = "https://www.barnesandnoble.com/",
+            //    image = "barnsandnoble.png"
+            //});
+
+            Stores.Add(new Store()
+            {
+                name = "Target",
+                link = "https://www.target.com/",
+                image = "target.png"
             });
 
             foreach (var item in Stores)
@@ -135,6 +256,9 @@ namespace XFWallet.ViewModels
             StoresSearch.Clear();
             foreach (var item in stores)
                 StoresSearch.Add(item);
+
+            IsEmpty = StoresSearch.Count == 0;
+            await ScrollView.ScrollToAsync(0, 0, false);
         }
 
         Task<List<Store>> Search(string text)
@@ -162,7 +286,20 @@ namespace XFWallet.ViewModels
 
         private async Task ExecuteNavigateToAddCreditCardPageCommand()
         {
-            await Navigation.PushPopupAsync(new AddCreditCardPage());
+            var cardPage = new AddCreditCardPage();
+            cardPage.Disappearing += Scroll;
+
+            void Scroll(object sender, EventArgs e)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    ScrollView.IsEnabled = true;
+                    cardPage.Disappearing -= Scroll;
+                });
+            };
+
+            await Navigation.PushPopupAsync(cardPage);
+            ScrollView.IsEnabled = false;
         }
 
         public void SubscribeAddCard()
@@ -199,6 +336,9 @@ namespace XFWallet.ViewModels
             StoresSearch.Clear();
             foreach (var item in stores)
                 StoresSearch.Add(item);
+
+            IsEmpty = StoresSearch.Count == 0;
+            await ScrollView.ScrollToAsync(0, 0, false);
         }
     }
 }

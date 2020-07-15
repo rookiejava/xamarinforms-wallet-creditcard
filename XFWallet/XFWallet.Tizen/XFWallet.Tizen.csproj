@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\XFWallet\XFWallet\XFWallet.csproj" />
+    <ProjectReference Include="..\XFWallet\XFWallet.csproj" />
   </ItemGroup>
 
   

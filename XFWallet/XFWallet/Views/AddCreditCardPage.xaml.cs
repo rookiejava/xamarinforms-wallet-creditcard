@@ -18,6 +18,14 @@ namespace XFWallet.Views
                 var entry = (Entry)sender;
                 entry.Text = Regex.Replace(e.NewTextValue.ToLower(), @"(?<=\b)[a-zA-Z]", m => m.Value.ToUpper());
             };
+
+
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
         }
     }
 }

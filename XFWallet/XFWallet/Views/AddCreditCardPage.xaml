@@ -38,32 +38,34 @@
             </Style>
             <Style x:Key="frameCancel" TargetType="pancakeView:PancakeView">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="CornerRadius" Value="10,0,0,0" />
+                <Setter Property="CornerRadius" Value="25,0,0,0" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="10,0,0,0" />
             </Style>
             <Style x:Key="btnCancel" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="200" />
                 <Setter Property="TextColor" Value="Black" />
+                <Setter Property="FontSize" Value="30" />
             </Style>
             <Style x:Key="btnConfirm" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Black" />
-                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="200" />
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="30" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <pancakeView:PancakeView
         x:Name="pancake"
-        Margin="20,0,20,0"
+        Margin="20,500,20,0"
         BackgroundColor="White"
-        CornerRadius="50"
+        CornerRadius="100"
         HasShadow="False"
-        HeightRequest="380"
+        HeightRequest="1000"
         HorizontalOptions="Center"
         VerticalOptions="Start"
-        WidthRequest="350">
+        WidthRequest="1200">
         <Grid ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -76,29 +78,29 @@
             </Grid.ColumnDefinitions>
             <Image
                 Grid.Row="0"
-                Margin="40,40,0,0"
+                Margin="120,100,0,0"
                 Aspect="AspectFit"
-                HeightRequest="30"
+                HeightRequest="120"
                 HorizontalOptions="Start"
                 Source="{Binding CardFlag}"
-                WidthRequest="48" />
+                WidthRequest="150" />
             <StackLayout
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
-                Margin="22,0,25,0"
+                Margin="100,0,25,0"
                 Padding="20"
                 Spacing="{OnPlatform Android='0',
-                                     iOS='20'}">
+                                     iOS='20', Tizen='40'}">
                 <renderers:CustomEntryBorderless
                     x:Name="entryCardName"
-                    FontSize="Small"
+                    FontSize="30"
                     Keyboard="Text"
                     Placeholder="Card name"
                     PlaceholderColor="{StaticResource colorGray}"
                     ReturnType="Next"
                     Text="{Binding CardName}" />
                 <renderers:CustomEntryBorderless
-                    FontSize="Small"
+                    FontSize="30"
                     Keyboard="Numeric"
                     Placeholder="Number"
                     PlaceholderColor="{StaticResource colorGray}"
@@ -109,7 +111,7 @@
                     </renderers:CustomEntryBorderless.Behaviors>
                 </renderers:CustomEntryBorderless>
                 <renderers:CustomEntryBorderless
-                    FontSize="Small"
+                    FontSize="30"
                     Keyboard="Numeric"
                     Placeholder="Expiration date"
                     PlaceholderColor="{StaticResource colorGray}"
@@ -120,7 +122,7 @@
                     </renderers:CustomEntryBorderless.Behaviors>
                 </renderers:CustomEntryBorderless>
                 <renderers:CustomEntryBorderless
-                    FontSize="Small"
+                    FontSize="30"
                     Keyboard="Numeric"
                     Placeholder="CVV"
                     PlaceholderColor="{StaticResource colorGray}"

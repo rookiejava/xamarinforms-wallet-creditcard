@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ElmSharp;
+using System;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
@@ -13,6 +14,7 @@ namespace Xamarin.Forms.PancakeView.Tizen
     {
         private RoundRectangle _roundRectangle;
         private BorderRectangle _borderRectangle;
+        private EvasObject _nativeContent;
         private IntPtr _evasMap;
 
         public PancakeViewRenderer() : base()
@@ -80,11 +82,18 @@ namespace Xamarin.Forms.PancakeView.Tizen
             if (Element.Content == null)
                 return;
             IVisualElementRenderer renderer = Xamarin.Forms.Platform.Tizen.Platform.GetOrCreateRenderer(Element.Content);
-            Control.PackEnd(renderer.NativeView);
+            _nativeContent = renderer.NativeView;
+            Control.PackEnd(_nativeContent);
         }
 
         private void OnLayout()
         {
+            // empty on purpose
+        }
+
+        protected override void UpdateLayout()
+        {
+            base.UpdateLayout();
             _roundRectangle.Draw(Control.Geometry);
             _borderRectangle.Draw(Control.Geometry);
             UpdateBackgroundColor(false);

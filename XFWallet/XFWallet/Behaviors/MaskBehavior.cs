@@ -38,13 +38,14 @@ namespace XFWallet.Behaviors
             if ((args.OldTextValue == null) || (args.OldTextValue.Length <= args.NewTextValue.Length))
                 for (int i = MaskText.Length; i >= text.Length; i--)
                 {
-                    if (MaskText[(text.Length - 1)] != '#')
+                    if ((text.Length - 1 >= 0) && MaskText[(text.Length - 1)] != '#')
                     {
                         text = text.Insert((text.Length - 1), MaskText[(text.Length - 1)].ToString());
                     }
                 }
 
             entry.Text = text;
+            entry.CursorPosition = text.Length;
             entry.Placeholder = MaskText;
         }
     }

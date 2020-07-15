@@ -4,17 +4,24 @@ using Xamarin.Forms.Platform.Tizen;
 using Xamarin.Forms.Platform.Tizen.Native;
 using XFWallet.Renderers;
 using XFWallet.Tizen.Renderers;
+using XEntry = Xamarin.Forms.Entry;
 using EEntry = ElmSharp.Entry;
 using ELayout = ElmSharp.Layout;
+using NEntry = Xamarin.Forms.Platform.Tizen.Native.Entry;
 
 [assembly: ExportRenderer(typeof(CustomEntryBorderless), typeof(CustomEntryBorderlessRenderer))]
 namespace XFWallet.Tizen.Renderers
 {
     public class CustomEntryBorderlessRenderer : EntryRenderer
     {
+        public CustomEntryBorderlessRenderer()
+        {
+             RegisterPropertyHandler(XEntry.CursorPositionProperty, UpdateCursorPosition);
+        }
+
         protected override EEntry CreateNativeControl()
         {
-            return new CustomEditfieldEntry(Forms.NativeParent)
+            return new NEntry(Forms.NativeParent)
             {
                 IsSingleLine = true,
             };
@@ -28,6 +35,11 @@ namespace XFWallet.Tizen.Renderers
             {
                 Control.BackgroundColor = ElmSharp.Color.White;
             }
+        }
+
+        void UpdateCursorPosition()
+        {
+            ((NEntry)Control).CursorPosition = Element.CursorPosition;
         }
     }
 
